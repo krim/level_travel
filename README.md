@@ -24,7 +24,23 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Setup
+```ruby
+LevelTravel::Settings.api_token = 'YOUR_API_TOKEN'
+```
+
+### References
+```ruby
+LevelTravel::References.departures
+LevelTravel::References.destinations
+LevelTravel::References.operators
+LevelTravel::References.airlines
+LevelTravel::References.airports
+LevelTravel::References.hotel_dump
+LevelTravel::References.hotel_room_dump
+LevelTravel::References.hotels(hotel_ids: [], region_ids: [], csv: false)
+LevelTravel::References.flights_and_nights(city_from:, country_to:, start_date:, end_date:)
+```
 
 ## Development
 
