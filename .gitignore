@@ -1,2 +1,3 @@
 coverage
 .bundle
+.rspec_status

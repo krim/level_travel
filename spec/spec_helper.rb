@@ -2,10 +2,13 @@
 
 require 'bundler/setup'
 require 'level_travel'
-require 'simplecov'
 
-SimpleCov.start do
-  add_filter 'spec/*'
+if ENV['WITH_COVERAGE']
+  require 'simplecov'
+
+  SimpleCov.start do
+    add_filter 'spec/*'
+  end
 end
 
 RSpec.configure do |config|

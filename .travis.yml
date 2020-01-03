@@ -3,6 +3,7 @@
 env:
   global:
     - CC_TEST_REPORTER_ID=04b3794f3ff70a8c4e34f19717d9ec7dc0d31bd844579dd12e3bbbe92c41871a
+    - WITH_COVERAGE=true
 language: ruby
 rvm:
   - 2.6.5
