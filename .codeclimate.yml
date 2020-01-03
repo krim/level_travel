@@ -37,7 +37,7 @@ plugins:
       - 'spec/'
   rubocop:
     enabled: true
-    channel: rubocop-0-63
+    channel: rubocop-0-76
     config:
       file: .rubocop.yml
 
