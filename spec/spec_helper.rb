@@ -2,6 +2,7 @@
 
 require 'bundler/setup'
 require 'level_travel'
+require 'webmock/rspec'
 
 if ENV['WITH_COVERAGE']
   require 'simplecov'
