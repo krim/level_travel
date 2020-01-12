@@ -1,6 +1,6 @@
 # LevelTravel
 
-Wrapper for level.travel API.
+Wrapper for [level.travel](https://level.travel/) API v3.
 
 [![Build Status](https://travis-ci.org/lookmytour/level_travel.svg?branch=master)](https://travis-ci.org/lookmytour/level_travel)
 [![Maintainability](https://api.codeclimate.com/v1/badges/6d7aa78830602cc3f891/maintainability)](https://codeclimate.com/github/lookmytour/level_travel/maintainability)

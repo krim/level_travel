@@ -2,7 +2,6 @@
 
 require 'faraday'
 require 'oj'
-require 'dry-struct'
 
 module LevelTravel
   class Request
