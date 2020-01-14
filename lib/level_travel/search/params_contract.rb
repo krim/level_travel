@@ -3,8 +3,14 @@
 module LevelTravel
   module Search
     class ParamsContract < Dry::Validation::Contract
-      STARS_RANGE = (1..5).freeze
-      MAX_KID_AGE = 12
+      config.messages.default_locale = :en
+      config.messages.top_namespace = 'level_travel'
+      config.messages.load_paths << File.expand_path('../../../../config/errors.yml', __FILE__).freeze
+
+      RANGES = {
+        stars: (1..5).freeze,
+        kids_age: (0..12).freeze
+      }.freeze
 
       params do
         required(:from_city).filled(:string)
@@ -22,25 +28,26 @@ module LevelTravel
       end
 
       rule(:start_date) do
-        key.failure('must be in the future') if value <= Date.today
+        key.failure(:invalid) if value <= Date.today
       end
 
       rule(:stars_from) do
-        key.failure("must be in range of #{STARS_RANGE}") unless STARS_RANGE.include?(value)
+        key.failure(:not_in_range, range: RANGES.fetch(:stars)) unless RANGES.fetch(:stars).include?(value)
       end
 
       rule(:stars_to) do
-        key.failure("must be in range of #{STARS_RANGE}") unless STARS_RANGE.include?(value)
+        key.failure(:not_in_range, range: RANGES.fetch(:stars)) unless RANGES.fetch(:stars).include?(value)
       end
 
       rule(:kids_ages) do
-        key.failure('kids_ages is required') if key? && values[:kids] && value.empty?
-        key.failure("all kids_ages have to be below #{MAX_KID_AGE}") if value.any? { |age| age > MAX_KID_AGE }
+        key.failure(:required) if key? && values[:kids] && value.empty?
 
-        if value.size != values[:kids].to_i
-          key.failure(
-            "number of kids_ages is not equal to kids #{value.size} != #{values[:kids].to_i}"
-          )
+        if value.any? { |age| !RANGES.fetch(:kids_age).include?(age) }
+          key.failure(:not_in_range, range: RANGES.fetch(:kids_age))
+        end
+
+        if !value.empty? && value.size != values[:kids].to_i
+          key.failure(:not_equal_to_kids, actual: value.size, needed: values[:kids].to_i)
         end
       end
     end
