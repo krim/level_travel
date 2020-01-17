@@ -27,6 +27,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'dry-struct', '~> 1.0'
   spec.add_dependency 'dry-types', '~> 1.0'
+  spec.add_dependency 'dry-validation', '~> 1.4'
   spec.add_dependency 'faraday'
   spec.add_dependency 'oj'
 

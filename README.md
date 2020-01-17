@@ -1,6 +1,6 @@
 # LevelTravel
 
-Wrapper for level.travel API.
+Wrapper for [level.travel](https://level.travel/) API v3.
 
 [![Build Status](https://travis-ci.org/lookmytour/level_travel.svg?branch=master)](https://travis-ci.org/lookmytour/level_travel)
 [![Maintainability](https://api.codeclimate.com/v1/badges/6d7aa78830602cc3f891/maintainability)](https://codeclimate.com/github/lookmytour/level_travel/maintainability)
@@ -40,6 +40,60 @@ LevelTravel::References.hotel_dump
 LevelTravel::References.hotel_room_dump
 LevelTravel::References.hotels(hotel_ids: [], region_ids: [], csv: false)
 LevelTravel::References.flights_and_nights(city_from:, country_to:, start_date:, end_date:)
+```
+
+### Search
+
+Full list of params for search:
+```ruby
+{
+  from_city: 'Moscow',
+  to_country: 'EG',
+  nights: '2',
+  adults: '2',
+  start_date: Date.new(2020, 1, 17),
+  to_city: 'Hurghada',
+  hotel_ids: %w[123 456],
+  kids: '2',
+  kids_ages: %w[2 5],
+  stars_from: '2',
+  stars_to: '4'
+}
+```
+
+How to make a search request:
+```ruby
+search_params = {
+  from_city: 'Moscow',
+  to_country: 'EG',
+  nights: '2',
+  adults: '2',
+  start_date: Date.new(2020, 1, 25)
+}
+
+params_contract = LevelTravel::Search::ParamsContract.new.call(search_params) # optional, it validates input params
+params = LevelTravel::Search::Params.new(params_contract.to_h)
+search_result = LevelTravel::Search::Request.enqueue(params)
+status_result = LevelTravel::Search::Request.status(search_result.body.fetch(:request_id))
+status_result.body
+=> {
+  :success => true,
+  :status => {
+    :"45" => "skipped",
+    :"4" => "no_results",
+    :"8" => "skipped",
+    :"44" => "skipped",
+    :"1" => "no_results",
+    :"34" => "skipped",
+    :"22" => "skipped",
+    :"7" => "skipped",
+    :"43" => "skipped",
+    :"6" => "skipped",
+    :"2" => "all_filtered",
+    :"37" => "skipped",
+    :"70" => "no_results" 
+  }
+}
 ```
 
 ## Development

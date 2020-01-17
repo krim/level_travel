@@ -1,0 +1,14 @@
+en:
+  level_travel:
+    errors:
+      rules:
+        start_date:
+          invalid: 'must be in the future'
+        stars_from:
+          not_in_range: "must be in range of %{range}"
+        stars_to:
+          not_in_range: "must be in range of %{range}"
+        kids_ages:
+          required: "is required"
+          not_in_range: "must be in range of %{range}"
+          not_equal_to_kids: "number of kids_ages is not equal to kids %{actual} != %{needed}"
