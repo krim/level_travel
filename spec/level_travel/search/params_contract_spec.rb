@@ -4,19 +4,19 @@ RSpec.describe LevelTravel::Search::ParamsContract do
   subject(:errors) { described_class.new.call(params).errors.to_h }
 
   let(:start_date) { Date.today.next_month }
-  let(:kids_ages) { [3, 5] }
-  let(:stars_from) { 1 }
-  let(:stars_to) { 4 }
+  let(:kids_ages) { %w[3 5] }
+  let(:stars_from) { '1' }
+  let(:stars_to) { '4' }
   let(:params) do
     {
       from_city: 'Moscow',
       to_country: 'EG',
-      nights: 2,
-      adults: 2,
+      nights: '2',
+      adults: '2',
       start_date: start_date,
       to_city: 'Hurghada',
-      hotel_ids: [123, 456],
-      kids: 2,
+      hotel_ids: %w[123 456],
+      kids: '2',
       kids_ages: kids_ages,
       stars_from: stars_from,
       stars_to: stars_to
@@ -25,6 +25,22 @@ RSpec.describe LevelTravel::Search::ParamsContract do
 
   it 'validates the params' do
     expect(errors).to be_empty
+  end
+
+  context 'when some params were not provided' do
+    let(:params) do
+      {
+        from_city: 'Moscow',
+        to_country: 'EG',
+        nights: '2',
+        adults: '2',
+        start_date: start_date
+      }
+    end
+
+    it 'validates the params' do
+      expect(errors).to be_empty
+    end
   end
 
   describe 'start_date' do
@@ -47,14 +63,15 @@ RSpec.describe LevelTravel::Search::ParamsContract do
     end
 
     context 'when its above than maximum' do
-      let(:kids_ages) { [10, 15] }
+      let(:kids_ages) { %w[10 15] }
 
       it 'returns an error' do
         expect(errors[:kids_ages]).to contain_exactly('must be in range of 0..12')
       end
     end
+
     context 'when its count not equal to kids count' do
-      let(:kids_ages) { [1] }
+      let(:kids_ages) { %w[1] }
 
       it 'returns an error' do
         expect(errors[:kids_ages]).to contain_exactly('number of kids_ages is not equal to kids 1 != 2')
@@ -64,7 +81,7 @@ RSpec.describe LevelTravel::Search::ParamsContract do
 
   describe 'stars_from' do
     context 'when its not in range' do
-      let(:stars_from) { 6 }
+      let(:stars_from) { '6' }
 
       it 'returns an error' do
         expect(errors[:stars_from]).to contain_exactly('must be in range of 1..5')
@@ -74,7 +91,7 @@ RSpec.describe LevelTravel::Search::ParamsContract do
 
   describe 'stars_to' do
     context 'when its not in range' do
-      let(:stars_to) { 6 }
+      let(:stars_to) { '6' }
 
       it 'returns an error' do
         expect(errors[:stars_to]).to contain_exactly('must be in range of 1..5')

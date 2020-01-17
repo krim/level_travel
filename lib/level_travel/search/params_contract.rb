@@ -5,13 +5,14 @@ module LevelTravel
     class ParamsContract < Dry::Validation::Contract
       config.messages.default_locale = :en
       config.messages.top_namespace = 'level_travel'
-      config.messages.load_paths << File.expand_path('../../../../config/errors.yml', __FILE__).freeze
+      config.messages.load_paths << File.expand_path('../../../config/errors.yml', __dir__).freeze
 
       RANGES = {
         stars: (1..5).freeze,
         kids_age: (0..12).freeze
       }.freeze
 
+      # TODO: from_city, to_country, and to_city are also possible to be an ID
       params do
         required(:from_city).filled(:string)
         required(:to_country).value(:string)
@@ -32,21 +33,21 @@ module LevelTravel
       end
 
       rule(:stars_from) do
-        key.failure(:not_in_range, range: RANGES.fetch(:stars)) unless RANGES.fetch(:stars).include?(value)
+        key.failure(:not_in_range, range: RANGES.fetch(:stars)) if key? && !RANGES.fetch(:stars).include?(value)
       end
 
       rule(:stars_to) do
-        key.failure(:not_in_range, range: RANGES.fetch(:stars)) unless RANGES.fetch(:stars).include?(value)
+        key.failure(:not_in_range, range: RANGES.fetch(:stars)) if key? && !RANGES.fetch(:stars).include?(value)
       end
 
       rule(:kids_ages) do
         key.failure(:required) if key? && values[:kids] && value.empty?
 
-        if value.any? { |age| !RANGES.fetch(:kids_age).include?(age) }
+        if key? && value.any? { |age| !RANGES.fetch(:kids_age).include?(age) }
           key.failure(:not_in_range, range: RANGES.fetch(:kids_age))
         end
 
-        if !value.empty? && value.size != values[:kids].to_i
+        if key? && !value.empty? && value.size != values[:kids].to_i
           key.failure(:not_equal_to_kids, actual: value.size, needed: values[:kids].to_i)
         end
       end

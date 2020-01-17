@@ -4,9 +4,9 @@ require 'dry-types'
 
 module LevelTravel
   module Types
-    include Dry.Types(:params, :strict, default: :strict)
+    include Dry.Types()
 
     StrippedString = Types::Strict::String.constructor(&:strip)
-    ArrayOfIntegers = Types.Array(Types::Strict::Integer)
+    ArrayOfIntegers = Types.Array(Types::Coercible::Integer)
   end
 end
