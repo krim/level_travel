@@ -74,7 +74,8 @@ search_params = {
 params_contract = LevelTravel::Search::ParamsContract.new.call(search_params) # optional, it validates input params
 params = LevelTravel::Search::Params.new(params_contract.to_h)
 search_result = LevelTravel::Search::Request.enqueue(params)
-status_result = LevelTravel::Search::Request.status(search_result.body.fetch(:request_id))
+request_id = search_result.body.fetch(:request_id)
+status_result = LevelTravel::Search::Request.status(request_id)
 status_result.body
 => {
   :success => true,
@@ -94,6 +95,13 @@ status_result.body
     :"70" => "no_results" 
   }
 }
+```
+### Get grouped hotels
+```ruby
+LevelTravel::Search::Request.get_grouped_hotels(request_id)
+# or
+# Operators' IDs. Succeeded IDs from the result of status request. 
+LevelTravel::Search::Request.get_grouped_hotels(request_id, operator_ids: [1,2,3]) 
 ```
 
 ## Development
