@@ -98,10 +98,44 @@ status_result.body
 ```
 ### Get grouped hotels
 ```ruby
-LevelTravel::Search::Request.get_grouped_hotels(request_id)
+hotels = LevelTravel::Search::Request.get_grouped_hotels(request_id)
+
 # or
+
 # Operators' IDs. Succeeded IDs from the result of status request. 
-LevelTravel::Search::Request.get_grouped_hotels(request_id, operator_ids: [1,2,3]) 
+hotels = LevelTravel::Search::Request.get_grouped_hotels(request_id, operator_ids: [1,2,3])
+
+hotels.body
+=> {:success=>true,
+  :status=>
+    {:"4"=>"no_results",
+      :"22"=>"all_filtered",
+      .....
+      :"44"=>"all_filtered"},
+  :go_ext_version=>"1.10.0",
+  :hotels=>
+    [{:hotel=>
+      {:id=>9080789,
+        ...
+      }
+    }]
+}
+```
+
+### Get hotel's offers
+```ruby
+hotel_id = hotels.body[:hotels][0][:hotel][:id]
+LevelTravel::Search::Request.get_hotel_offers(request_id, hotel_id: hotel_id, operator_ids: [], compact: false)
+
+# or
+
+# Operators' IDs. Succeeded IDs from the result of status request. 
+LevelTravel::Search::Request.get_hotel_offers(request_id, hotel_id: hotel_id, operator_ids: [1,2,3], compact: false)
+
+# or
+
+# With `compact`: Return tours without additional information if it's true.
+LevelTravel::Search::Request.get_hotel_offers(request_id, hotel_id: hotel_id, operator_ids: [1,2,3], compact: true) 
 ```
 
 ## Development
