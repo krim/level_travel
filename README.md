@@ -2,6 +2,7 @@
 
 Wrapper for [level.travel](https://level.travel/) API v3.
 
+[![Gem Version](https://badge.fury.io/rb/level_travel.svg)](https://badge.fury.io/rb/level_travel)
 [![Build Status](https://travis-ci.org/lookmytour/level_travel.svg?branch=master)](https://travis-ci.org/lookmytour/level_travel)
 [![Maintainability](https://api.codeclimate.com/v1/badges/6d7aa78830602cc3f891/maintainability)](https://codeclimate.com/github/lookmytour/level_travel/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/6d7aa78830602cc3f891/test_coverage)](https://codeclimate.com/github/lookmytour/level_travel/test_coverage)
