@@ -56,4 +56,75 @@ RSpec.describe LevelTravel::Search::Request do
       expect(LevelTravel::Request).to have_received(:get).with('/search/status', request_id: 'string_request_id')
     end
   end
+
+  describe '.get_grouped_hotels' do
+    subject(:do_request) { described_class.get_grouped_hotels(request_id) }
+
+    let(:request_id) { 'string_request_id' }
+
+    context 'without operator_ids' do
+      it 'makes a request to get info about hotels' do
+        do_request
+
+        expect(LevelTravel::Request).to have_received(:get).with(
+          '/search/get_grouped_hotels', request_id: 'string_request_id'
+        )
+      end
+    end
+
+    context 'with operator_ids' do
+      subject(:do_request) { described_class.get_grouped_hotels(request_id, operator_ids: operator_ids) }
+
+      let(:operator_ids) { [1, 2, 3] }
+
+      it 'makes a request to get info about hotels' do
+        do_request
+
+        expect(LevelTravel::Request).to have_received(:get).with(
+          '/search/get_grouped_hotels',
+          request_id: 'string_request_id', operator_ids: '1,2,3'
+        )
+      end
+    end
+  end
+
+  describe '.get_hotel_offers' do
+    subject(:do_request) { described_class.get_hotel_offers(request_id, hotel_id: hotel_id) }
+
+    let(:request_id) { 'string_request_id' }
+    let(:hotel_id) { 100_500 }
+
+    context 'without operator_ids' do
+      it 'makes a request to get info about hotels' do
+        do_request
+
+        expect(LevelTravel::Request).to have_received(:get).with(
+          '/search/get_hotel_offers',
+          request_id: 'string_request_id',
+          hotel_id: 100_500,
+          compact: false
+        )
+      end
+    end
+
+    context 'with operator_ids' do
+      subject(:do_request) do
+        described_class.get_hotel_offers(request_id, hotel_id: hotel_id, operator_ids: operator_ids)
+      end
+
+      let(:operator_ids) { [1, 2, 3] }
+
+      it 'makes a request to get info about hotels' do
+        do_request
+
+        expect(LevelTravel::Request).to have_received(:get).with(
+          '/search/get_hotel_offers',
+          request_id: 'string_request_id',
+          hotel_id: 100_500,
+          operator_ids: '1,2,3',
+          compact: false
+        )
+      end
+    end
+  end
 end

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    level_travel (0.2.0)
+    level_travel (0.3.0)
       dry-struct (~> 1.0)
       dry-types (~> 1.0)
       dry-validation (~> 1.4)
