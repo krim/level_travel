@@ -127,4 +127,21 @@ RSpec.describe LevelTravel::Search::Request do
       end
     end
   end
+
+  describe '.actualize' do
+    subject(:do_request) { described_class.actualize(request_id, tour_id: tour_id) }
+
+    let(:request_id) { 'string_request_id' }
+    let(:tour_id) { 'string_tour_id' }
+
+    it 'makes a request to get more actual info about the offer' do
+      do_request
+
+      expect(LevelTravel::Request).to have_received(:get).with(
+        '/search/actualize',
+        request_id: 'string_request_id',
+        tour_id: 'string_tour_id'
+      )
+    end
+  end
 end

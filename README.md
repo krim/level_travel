@@ -126,17 +126,77 @@ hotels.body
 ### Get hotel's offers
 ```ruby
 hotel_id = hotels.body[:hotels][0][:hotel][:id]
-LevelTravel::Search::Request.get_hotel_offers(request_id, hotel_id: hotel_id)
+hotel_offers = LevelTravel::Search::Request.get_hotel_offers(request_id, hotel_id: hotel_id)
 
 # or
 
 # Operators' IDs. Succeeded IDs from the result of status request. 
-LevelTravel::Search::Request.get_hotel_offers(request_id, hotel_id: hotel_id, operator_ids: [1,2,3])
+hotel_offers = LevelTravel::Search::Request.get_hotel_offers(request_id, hotel_id: hotel_id, operator_ids: [1,2,3])
 
 # or
 
 # With `compact`: Return tours without additional information if it's true.
-LevelTravel::Search::Request.get_hotel_offers(request_id, hotel_id: hotel_id, operator_ids: [1,2,3], compact: true) 
+hotel_offers = LevelTravel::Search::Request.get_hotel_offers(request_id, hotel_id: hotel_id, operator_ids: [1,2,3], compact: true)
+hotel_offers.body
+=> {:success=>true,
+  :request_id=>"MjEzf......",
+  :hotel_offers=>
+   [{:version=>1,
+     :id=>"45-1ec74031c91e....",
+     :operator=>45,
+     :net_price=>50991,
+     :fuel_charge=>0,
+     :price=>50991,
+     :city_from=>213,
+     :country_to=>210,
+     :city_to=>0,
+     :start_date=>"2020-02-26",
+     :arrival_date=>"2020-02-26",
+     :nights_count=>7,
+     :region_name=>"Шарджа",
+     :room_type=>"Standard",
+     :pansion=>{:name=>"BB", :description=>"Завтрак", :original_name=>"BB", :id=>2},
+     :staytype_description=>"2 ADL",
+     :hotel_id=>9073949,
+     :hotel_name=>"Royal Hotel",
+     :stars=>3,
+      ...
+  }]
+}
+
+```
+
+### Get actual info about the offer
+```ruby
+tour_id = hotel_offers.body[:hotels][0][:hotel][:id]
+offer = LevelTravel::Search::Request.actualize(request_id, tour_id: tour_id)
+
+offer.body
+=> {:success=>true,
+  :actualized=>true,
+  :price=>50991,
+  :transfer=>true,
+  :medical_insurance=>false,
+  :extras=>[{:name=>"Страховка от задержки рейса", :code_name=>"bonus_insurance", :price=>0}, {:name=>"Кино в отпуск от IVI", :code_name=>"bonus_ivi", :price=>0}],
+  :visa_price=>0,
+  :flights=>
+   [{:to=>
+      {:origin=>{:city=>{:id=>213, :name=>"Москва"}, :id=>4, :name=>"Домодедово", :code=>"DME", :timezone=>"Europe/Moscow"},
+       :departure=>"2020-02-26T23:35:00.000+03:00",
+       :destination=>{:city=>{:id=>11498, :name=>"Абу-Даби"}, :id=>36, :name=>"Абу-Даби", :code=>"AUH", :timezone=>"Asia/Dubai"},
+       :arrival=>"2020-02-27T05:55:00.000+04:00",
+       :flight_no=>"EY 064",
+       :business=>false,
+       :direct=>true,
+       :airline=>
+        {:id=>19,
+          ...
+        }
+      }
+      ...
+    }]
+    ...
+}
 ```
 
 ## Development
