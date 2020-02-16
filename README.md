@@ -43,7 +43,60 @@ LevelTravel::References.hotels(hotel_ids: [], region_ids: [], csv: false)
 LevelTravel::References.flights_and_nights(city_from:, country_to:, start_date:, end_date:)
 ```
 
-### Search
+### Hot tours
+
+Full list of hot tours params:
+```ruby
+{
+  countries: %w[RU TR MV],
+  start_date: Date.new(2020, 1, 17),
+  end_date: Date.new(2020, 1, 27),
+  nights: [3, 10],
+  stars: [2, 5],
+  adults: 2,
+  pansions: %w[RO BB HB FB],
+  sort_by: 'prices',
+  min_price: 5_000,
+  max_price: 150_000,
+  per_page: 50,
+  page: 1
+}
+```
+
+How to make a request to get hot tours:
+```ruby
+hot_tours_params = {
+  start_date: Date.new(2020, 1, 17),
+  end_date: Date.new(2020, 1, 27),
+  sort_by: 'prices'
+}
+
+params_contract = LevelTravel::HotTours::ParamsContract.new.call(hot_tours_params) # optional, it validates input params
+params = LevelTravel::HotTours::Params.new(params_contract.to_h)
+hot_tours_result = LevelTravel::HotTours::Get.call(params)
+
+hot_tours_result.body[:hot_tours]
+=> [{:id=>185102968,
+  :link=>"/packages/185102968",
+  :date=>"2020-03-24",
+  :nights=>1,
+  :price=>5181,
+  :adults=>1,
+  :region=>"Адлер",
+  :country=>"Россия",
+  :discount=>50,
+  :transfer=>false,
+  :medical_insurance=>false,
+  :pansion_name=>"RO",
+  :pansion_description=>"Без питания",
+  :hotel=>
+   {:id=>9019298,
+    ...
+   }
+}]
+```
+
+### Tours search
 
 Full list of params for search:
 ```ruby
