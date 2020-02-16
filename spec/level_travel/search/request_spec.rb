@@ -144,4 +144,38 @@ RSpec.describe LevelTravel::Search::Request do
       )
     end
   end
+
+  describe '.get_offer' do
+    subject(:do_request) { described_class.get_offer(request_id, tour_id: tour_id) }
+
+    let(:request_id) { 'string_request_id' }
+    let(:tour_id) { 'string_tour_id' }
+
+    it 'makes a request to submit the tour' do
+      do_request
+
+      expect(LevelTravel::Request).to have_received(:get).with(
+        '/search/get_offer',
+        request_id: 'string_request_id',
+        tour_id: 'string_tour_id'
+      )
+    end
+
+    context 'with from_package param' do
+      subject(:do_request) { described_class.get_offer(request_id, tour_id: tour_id, from_package: from_package) }
+
+      let(:from_package) { 100_500 }
+
+      it 'makes a request to submit the tour' do
+        do_request
+
+        expect(LevelTravel::Request).to have_received(:get).with(
+          '/search/get_offer',
+          request_id: 'string_request_id',
+          tour_id: 'string_tour_id',
+          from_package: 100_500
+        )
+      end
+    end
+  end
 end
