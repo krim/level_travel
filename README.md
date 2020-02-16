@@ -7,6 +7,23 @@ Wrapper for [level.travel](https://level.travel/) API v3.
 [![Maintainability](https://api.codeclimate.com/v1/badges/6d7aa78830602cc3f891/maintainability)](https://codeclimate.com/github/lookmytour/level_travel/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/6d7aa78830602cc3f891/test_coverage)](https://codeclimate.com/github/lookmytour/level_travel/test_coverage)
 
+
+## Table of Contents
+
+* [Installation](#installation)
+* [Usage](#usage)
+  * [Setup](#setup)
+  * [References](#references)
+  * [Hot tours](#hot-tours)
+  * [Search for tours](#search-for-tours)
+      * [Search request](#search-request)
+      * [Get hotel's offers](#get-hotels-offers)
+      * [Get actual info about the offer](#get-actual-info-about-the-offer)
+      * [Submit the tour to level.travel](#submit-the-tour-to-leveltravel)
+  * [Development](#development)
+  * [Contributing](#contributing)
+  * [License](#license)
+  
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -96,8 +113,9 @@ hot_tours_result.body[:hot_tours]
 }]
 ```
 
-### Tours search
+### Search for tours
 
+#### Search request
 Full list of params for search:
 ```ruby
 {
@@ -150,7 +168,8 @@ status_result.body
   }
 }
 ```
-### Get grouped hotels
+
+#### Get grouped hotels
 ```ruby
 hotels = LevelTravel::Search::Request.get_grouped_hotels(request_id)
 
@@ -176,7 +195,7 @@ hotels.body
 }
 ```
 
-### Get hotel's offers
+#### Get hotel's offers
 ```ruby
 hotel_id = hotels.body[:hotels][0][:hotel][:id]
 hotel_offers = LevelTravel::Search::Request.get_hotel_offers(request_id, hotel_id: hotel_id)
@@ -219,7 +238,7 @@ hotel_offers.body
 
 ```
 
-### Get actual info about the offer
+#### Get actual info about the offer
 ```ruby
 tour_id = hotel_offers.body[:hotels][0][:hotel][:id]
 offer = LevelTravel::Search::Request.actualize(request_id, tour_id: tour_id)
@@ -252,7 +271,7 @@ offer.body
 }
 ```
 
-### Submit the tour in level.travel
+#### Submit the tour to level.travel
 ```ruby
 offer = LevelTravel::Search::Request.get_offer(request_id, tour_id: tour_id)
 
