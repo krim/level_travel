@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.6.0
+
+* Add `https://api.level.travel/hot/tours`
+
 ## v0.5.0
 
 * Add `https://api.level.travel/search/get_offer`
