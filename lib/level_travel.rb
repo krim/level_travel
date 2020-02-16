@@ -16,3 +16,7 @@ require 'level_travel/references'
 require 'level_travel/search/params_contract'
 require 'level_travel/search/params'
 require 'level_travel/search/request'
+
+require 'level_travel/hot_tours/params_contract'
+require 'level_travel/hot_tours/params'
+require 'level_travel/hot_tours/get'
