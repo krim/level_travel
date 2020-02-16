@@ -199,6 +199,33 @@ offer.body
 }
 ```
 
+### Submit the tour in level.travel
+```ruby
+offer = LevelTravel::Search::Request.get_offer(request_id, tour_id: tour_id)
+
+offer.body
+=> {  
+     :success => true,
+     package => {  
+       :id => 798850,
+       :adults_count => 2,
+       :kids_count => 0,
+       :start_date => "2015-08-20",
+       :arrival_date => "2015-08-20",
+       :nights_count => 7,
+       :pansion => "AI",
+       :room_type => "Стандартный номер",
+       ...
+       :link => "https://leveltravel.dev/packages/798850?aflt=Partner&"
+      }
+    ...
+   }
+
+link_to_offer = offer.body.dig(:package, :link)
+link
+=> "https://leveltravel.dev/packages/798850?aflt=Partner&"
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.

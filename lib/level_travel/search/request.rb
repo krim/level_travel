@@ -35,9 +35,17 @@ module LevelTravel
       end
 
       # @param request_id [String] Request ID from the `enqueue` request
-      # @param tour_id [Integer] Tour ID from the `get_hotel_offers` request
+      # @param tour_id [String] Tour ID from the `get_hotel_offers` request
       def self.actualize(request_id, tour_id:)
         ::LevelTravel::Request.get('/search/actualize', request_id: request_id, tour_id: tour_id)
+      end
+
+      # @param request_id [String] Request ID from the `enqueue` request
+      # @param tour_id [String] Tour ID from the `get_hotel_offers` request
+      # @param from_package [Integer] To link previous offer to the current
+      def self.get_offer(request_id, tour_id:, from_package: nil)
+        params = from_package ? { from_package: from_package } : {}
+        ::LevelTravel::Request.get('/search/get_offer', request_id: request_id, tour_id: tour_id, **params)
       end
 
       # @param operator_ids [Array<Integer>] Operators' IDs. Succeeded IDs from the result of status request.

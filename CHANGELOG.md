@@ -1,5 +1,13 @@
 # Changelog
 
+## v0.5.0
+
+* Add `https://api.level.travel/search/get_offer`
+
+## v0.4.0
+
+* Add `https://api.level.travel/search/actualize`
+
 ## v0.3.0
 
 * Add `https://api.level.travel/search/get_grouped_hotels`
