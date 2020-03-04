@@ -1,5 +1,9 @@
 # Changelog
 
+## v0.7.0
+
+* Add `LevelTravel::Settings.error_load_path` to set file path with error messages.
+
 ## v0.6.0
 
 * Add `https://api.level.travel/hot/tours`

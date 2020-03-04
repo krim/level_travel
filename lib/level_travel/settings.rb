@@ -5,6 +5,7 @@ module LevelTravel
     module_function
 
     DEFAULT_TIMEOUT = 10
+    DEFAULT_ERROR_LOAD_PATH = File.expand_path('../config/errors.yml', __dir__).freeze
 
     def api_token
       @api_token
@@ -12,6 +13,14 @@ module LevelTravel
 
     def api_token=(token)
       @api_token = token
+    end
+
+    def error_load_path
+      @error_load_path || DEFAULT_ERROR_LOAD_PATH
+    end
+
+    def error_load_path=(paths)
+      @error_load_path = paths
     end
 
     def timeout

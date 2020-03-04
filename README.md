@@ -46,6 +46,10 @@ Or install it yourself as:
 ```ruby
 LevelTravel::Settings.api_token = 'YOUR_API_TOKEN'
 ```
+Optional file path for error messages. Default errors messages are [here](https://github.com/lookmytour/level_travel/blob/master/lib/config/errors.yml):
+```ruby
+LevelTravel::Settings.error_load_path = '/path/to/errors_messages.yml'
+```
 
 ### References
 ```ruby
