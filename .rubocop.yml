@@ -22,9 +22,6 @@ RSpec/ExpectInHook:
 RSpec/LetSetup:
   Enabled: false
 
-Metrics/LineLength:
-  Max: 120
-
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*_spec.rb'
@@ -50,6 +47,9 @@ Style/AsciiComments:
 
 Metrics/MethodLength:
   Max: 15
+
+Layout/LineLength:
+  Max: 120
 
 Layout/ClassStructure:
   Enabled: true
