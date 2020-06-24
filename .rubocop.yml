@@ -3,6 +3,7 @@ require:
 
 AllCops:
   AutoCorrect: true
+  NewCops: enable
   TargetRubyVersion: 2.7
 
 RSpec/NestedGroups:
