@@ -1,10 +1,14 @@
 require:
   - 'rubocop-rspec'
+  - 'rubocop-performance'
 
 AllCops:
   AutoCorrect: true
-  NewCops: enable
+  DisplayCopNames: true
+  DisplayStyleGuide: true
+  ExtraDetails: true
   TargetRubyVersion: 2.7
+  NewCops: enable
 
 RSpec/NestedGroups:
   Enabled: true
