@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.version = LevelTravel::VERSION
   spec.authors = ['Pavel Rodionov']
   spec.email = ['pasha.rod@mail.ru']
-  spec.required_ruby_version = '>= 2.5'
+  spec.required_ruby_version = '>= 2.5' # rubocop:disable Gemspec/RequiredRubyVersion
 
   spec.summary = 'Wrapper for level.travel API'
   spec.description = 'Wrapper for level.travel API'
