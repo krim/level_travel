@@ -47,7 +47,7 @@ module LevelTravel
     end
 
     def self.get(data, params = {})
-      ::LevelTravel::Request.get('/references/' + data, params)
+      ::LevelTravel::Request.get("/references/#{data}", params)
     end
 
     private_class_method :get
