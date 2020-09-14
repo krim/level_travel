@@ -20,9 +20,9 @@ Wrapper for [level.travel](https://level.travel/) API v3.
       * [Get hotel's offers](#get-hotels-offers)
       * [Get actual info about the offer](#get-actual-info-about-the-offer)
       * [Submit the tour to level.travel](#submit-the-tour-to-leveltravel)
-  * [Development](#development)
-  * [Contributing](#contributing)
-  * [License](#license)
+* [Development](#development)
+* [Contributing](#contributing)
+* [License](#license)
   
 ## Installation
 
