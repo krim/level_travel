@@ -37,7 +37,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'reek', '~> 6.0.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'rubocop', '~> 0.90.0'
+  spec.add_development_dependency 'rubocop', '~> 0.93.1'
   spec.add_development_dependency 'rubocop-rspec', '~> 1.37'
   spec.add_development_dependency 'simplecov'
   spec.add_development_dependency 'webmock', '~> 3.7'
